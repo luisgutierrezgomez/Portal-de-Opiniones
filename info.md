@@ -40,13 +40,19 @@ vote
 user_id
 
 Categories
+id
+category_id
+category
 
 ENDPOINTS
 
-POST /user Registrar un usuario ✅ con matices, falta validar email
+POST /user Registrar un usuario ✅
+
 GET /user/:id Devolver información de un usuario ✅
 POST /login Login de usuario (devuelve token) ✅
+
 PUT /user/:id Edita email de un usuario y username (require un token)(authentication)
+
 PUT /user/:id/password Edita password de un usuario(require un token)(authentication)
 
 Si queda tiempo:

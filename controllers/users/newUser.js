@@ -8,11 +8,11 @@ async function newUserController(req, res, next) {
 
   try {
     connection = await getConnection();
-    const { username, role, email, password } = req.body;
+    const { username, email, password } = req.body;
 
     await newUserSchema.validateAsync(req.body);
 
-    const id = await createUser(username, role, email, password);
+    const id = await createUser(username, email, password);
 
     res.send({
       status: "ok",
@@ -22,7 +22,5 @@ async function newUserController(req, res, next) {
     next(error);
   }
 }
-
-//Aquí iría la parte de enviar un mensaje de confirmación de registro al email indicado (ver en ddv)
 
 module.exports = { newUserController };
