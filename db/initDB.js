@@ -8,6 +8,7 @@ async function main() {
   try {
     connection = await getConnection();
 
+    await connection.query(`DROP TABLE IF EXISTS categories`);
     await connection.query(`DROP TABLE IF EXISTS opinion_votes`);
     await connection.query(`DROP TABLE IF EXISTS opinions`);
     await connection.query(`DROP TABLE IF EXISTS users`);
@@ -17,7 +18,6 @@ async function main() {
     CREATE TABLE users(
         id INTEGER PRIMARY KEY AUTO_INCREMENT,
         username VARCHAR(25) UNIQUE NOT NULL,
-        role ENUM("guest", "registered") DEFAULT "guest" NOT NULL,
         active BOOLEAN DEFAULT false,
         email VARCHAR(100) UNIQUE NOT NULL,
         password VARCHAR(100) NOT NULL,
@@ -32,10 +32,10 @@ async function main() {
     await connection.query(`
     CREATE TABLE opinions(
         id INTEGER PRIMARY KEY AUTO_INCREMENT,
-        opinionm_id INTEGER NOT NULL,
+        opinion_id INTEGER NOT NULL,
         text TEXT NOT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users(id)
+        FOREIGN KEY (opinion_id) REFERENCES users(id)
     )
     `);
 
@@ -48,6 +48,15 @@ async function main() {
         FOREIGN KEY (opinion_id) REFERENCES opinions(id)
       )
       `);
+
+    await connection.query(`
+  CREATE TABLE categories(
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    category_id INTEGER NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES opinions(id)
+  )
+  `);
   } catch (error) {
     console.error(error);
   } finally {

@@ -4,7 +4,6 @@ const express = require("express");
 const morgan = require("morgan");
 
 const { newUserController } = require("./controllers/users/newUser");
-const { validateUser } = require("./controllers/users/validateUser");
 const { getUserController } = require("./controllers/users/getUser");
 const { loginController } = require("./controllers/users/loginUser");
 const { deleteUserController } = require("./controllers/users/deleteUser");
@@ -27,8 +26,6 @@ app.use(morgan("dev"));
 //Rutas de usuarios
 
 app.post("/user", newUserController);
-
-app.get("/users/validate/:code", validateUser);
 
 app.post("/users/login", loginController);
 
