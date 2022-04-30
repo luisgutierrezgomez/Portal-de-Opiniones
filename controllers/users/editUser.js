@@ -52,7 +52,8 @@ async function editUserController(req, res, next) {
         UPDATE users
         SET username=?, email=?, lastUpdate=UTC_TIMESTAMP
         WHERE id=?
-        `[(username, email, id)]
+        `,
+        [username, email, id]
       );
     }
 

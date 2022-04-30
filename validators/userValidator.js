@@ -19,10 +19,6 @@ const newUserSchema = Joi.object().keys({
     .min(4)
     .required()
     .error(generateError("El campo email debe existir y ser válido")),
-  role: Joi.string()
-    .valid("guest", "registered")
-    .required()
-    .error(generateError("Este campo debe ser guest o registered")),
 });
 
 const loginUserSchema = Joi.object().keys({
@@ -63,6 +59,22 @@ const editUserPasswordSchema = Joi.object().keys({
     ),
 });
 
+const editUserSchema = Joi.object().keys({
+  email: Joi.string()
+    .email()
+    .required()
+    .error(generateError("El campo email debe contener un email válido", 400)),
+  username: Joi.string()
+    .max(25)
+    .required()
+    .error(
+      generateError(
+        "El campo nombre no debe de tener más de 25 caracteres",
+        400
+      )
+    ),
+});
+
 const editUserMailSchema = Joi.object().keys({
   oldMail: Joi.string()
     .min(8)
@@ -88,6 +100,7 @@ const editUserMailSchema = Joi.object().keys({
 module.exports = {
   newUserSchema,
   loginUserSchema,
+  editUserSchema,
   editUserPasswordSchema,
   editUserMailSchema,
 };

@@ -32,7 +32,7 @@ app.use(morgan("dev"));
 
 app.post("/user", newUserController);
 
-app.post("/users/login", loginController);
+app.post("/user/login", loginController);
 
 app.get("/user/:id", getUserController);
 
