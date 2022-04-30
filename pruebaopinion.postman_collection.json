@@ -109,7 +109,22 @@
 					"name": "Edit user",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUxMzI4OTEyLCJleHAiOjE2NTM5MjA5MTJ9.jaPVLXEHC5DoGw8eSdodxsm_To_2eKlyUZnHVDOF1cM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Lavadora\",\n    \"email\": \"lavadora@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:3000/user/:1",
 							"protocol": "http",
@@ -130,6 +145,14 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Edit password",
+					"request": {
+						"method": "PUT",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
@@ -137,9 +160,9 @@
 			"name": "Opiniones",
 			"item": [
 				{
-					"name": "Get all opinions",
+					"name": "Post opinion",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:3000/",
@@ -156,9 +179,9 @@
 					"response": []
 				},
 				{
-					"name": "Post opinion",
+					"name": "Get all opinions",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:3000/",

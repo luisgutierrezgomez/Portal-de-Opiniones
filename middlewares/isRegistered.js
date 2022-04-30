@@ -35,7 +35,7 @@ async function isRegistered(req, res, next) {
       throw generateError("El usuario no existe en la base de datos", 401);
     }
 
-    const tokenCreatedAt = new Date(tokenInfo.iat * 1000);
+    const tokenCreatedAt = new Date((tokenInfo.iat + 7200) * 1000);
     const userLastAuthUpdate = new Date(result[0].lastAuthUpdate);
     if (tokenCreatedAt < userLastAuthUpdate) {
       throw generateError(
@@ -43,6 +43,7 @@ async function isRegistered(req, res, next) {
         401
       );
     }
+    req.auth = tokenInfo;
     next();
   } catch (error) {
     next(error);
