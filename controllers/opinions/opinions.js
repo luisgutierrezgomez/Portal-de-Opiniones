@@ -8,16 +8,7 @@ const getEveryOpinionController = async (req, res, next) => {
     next(error);
   }
 };
-const createOpinionController = async (req, res, next) => {
-  try {
-    res.send({
-      status: "error",
-      message: "Not implemented",
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+
 const getSingleOpinionController = async (req, res, next) => {
   try {
     res.send({
@@ -62,7 +53,6 @@ const scoreOpinionController = async (req, res, next) => {
 
 module.exports = {
   getEveryOpinionController,
-  createOpinionController,
   getSingleOpinionController,
   deleteSingleOpinionController,
   deleteEveryOpinionController,

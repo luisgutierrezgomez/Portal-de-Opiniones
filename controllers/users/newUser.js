@@ -20,6 +20,8 @@ async function newUserController(req, res, next) {
     });
   } catch (error) {
     next(error);
+  } finally {
+    if (connection) connection.release();
   }
 }
 
