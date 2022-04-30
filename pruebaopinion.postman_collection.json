@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"Javier\",\n    \"role\": \"registered\",\n    \"email\": \"infaurden@gmail.com\",\n    \"password\": \"12345678\"\n}",
+							"raw": "{\n    \"username\": \"Javier\",\n    \"email\": \"infaurden@gmail.com\",\n    \"password\": \"12345678\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -71,14 +71,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/lusers/login",
+							"raw": "http://localhost:3000/user/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"lusers",
+								"user",
 								"login"
 							]
 						}
@@ -100,6 +100,32 @@
 							"path": [
 								"user",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/:1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								":1"
+							],
+							"variable": [
+								{
+									"key": "1",
+									"value": null
+								}
 							]
 						}
 					},

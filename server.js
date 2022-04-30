@@ -6,12 +6,17 @@ const morgan = require("morgan");
 const { newUserController } = require("./controllers/users/newUser");
 const { getUserController } = require("./controllers/users/getUser");
 const { loginController } = require("./controllers/users/loginUser");
+const { editUserController } = require("./controllers/users/editUser");
+const {
+  editUserPasswordController,
+} = require("./controllers/users/editUserPassword");
+const { newOpinionController } = require("./controllers/opinions/newOpinion");
+
 const { deleteUserController } = require("./controllers/users/deleteUser");
 
-const isRegistered = require("./middlewares/isUser");
+const isRegistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinionController,
-  createOpinionController,
   getSingleOpinionController,
   deleteSingleOpinionController,
   deleteEveryOpinionController,
@@ -31,14 +36,16 @@ app.post("/users/login", loginController);
 
 app.get("/user/:id", getUserController);
 
+app.put("/user/:id", isRegistered, editUserController);
+
+app.put("/user/:id/password", isRegistered, editUserPasswordController);
+
 app.delete("/user/:id", deleteUserController);
-// app.post("/user/:id", isUser, editUser);
-// app.post("/user/:id/password", isUser, editUserPassword);
 
 //Rutas de opiniones
 
 app.get("/", getEveryOpinionController);
-app.post("/", isRegistered, createOpinionController);
+app.post("/", isRegistered, newOpinionController);
 app.get("/opinion/:id", getSingleOpinionController);
 app.post("/opinion/punctuation", scoreOpinionController);
 app.delete("/opinion/:id", deleteSingleOpinionController);
