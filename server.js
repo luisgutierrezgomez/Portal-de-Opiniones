@@ -10,18 +10,17 @@ const { editUserController } = require("./controllers/users/editUser");
 const {
   editUserPasswordController,
 } = require("./controllers/users/editUserPassword");
-const { newOpinionController } = require("./controllers/opinions/newOpinion");
 
 const { deleteUserController } = require("./controllers/users/deleteUser");
 
-const isRegistered = require("./middlewares/isRegistered");
+const { newOpinionController } = require("./controllers/opinions/newOpinion");
 const {
   getEveryOpinionController,
-  getSingleOpinionController,
-  deleteSingleOpinionController,
-  deleteEveryOpinionController,
-  scoreOpinionController,
-} = require("./controllers/opinions/opinions");
+} = require("./controllers/opinions/getOpinions");
+const { editOpinionController } = require("./controllers/opinions/editOpinion");
+const { voteOpinionController } = require("./controllers/opinions/voteOpinion");
+
+const isRegistered = require("./middlewares/isRegistered");
 
 const app = express();
 
@@ -38,18 +37,16 @@ app.get("/user/:id", getUserController);
 
 app.put("/user/:id", isRegistered, editUserController);
 
-app.put("/user/:id/password", isRegistered, editUserPasswordController);
+app.post("/user/:id/password", isRegistered, editUserPasswordController);
 
 app.delete("/user/:id", deleteUserController);
 
 //Rutas de opiniones
 
-app.get("/", getEveryOpinionController);
 app.post("/", isRegistered, newOpinionController);
-app.get("/opinion/:id", getSingleOpinionController);
-app.post("/opinion/punctuation", scoreOpinionController);
-app.delete("/opinion/:id", deleteSingleOpinionController);
-app.delete("/", deleteEveryOpinionController);
+app.get("/", getEveryOpinionController);
+app.put("/opinion/:id", isRegistered, editOpinionController);
+app.post("/opinion/punctuation", isRegistered, voteOpinionController);
 
 //Middleware de 404
 app.use((req, res) => {

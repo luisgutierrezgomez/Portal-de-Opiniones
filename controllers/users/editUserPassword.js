@@ -11,7 +11,7 @@ async function editUserPasswordController(req, res, next) {
     connection = await getConnection();
     await editUserPasswordSchema.validateAsync(req.body);
 
-    const { id } = req.params; //Esto supuestamente va a ser importante, es una string
+    const { id } = req.params;
     const { oldPassword, newPassword } = req.body;
 
     if (req.auth.id !== Number(id)) {
@@ -28,7 +28,7 @@ async function editUserPasswordController(req, res, next) {
     );
 
     if (currentUser.length === 0) {
-      throw generateError("Tu password antigua no es correcta", 401);
+      throw generateError("El usuario no existe", 401);
     }
 
     await connection.query(
